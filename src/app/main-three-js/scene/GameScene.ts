@@ -12,6 +12,7 @@ import {
 import { GameEntity } from '../entities/GameEntity';
 import { GameMap } from '../map/GameMap';
 import { ResourceManager } from '../utils/ResourceManager';
+import { PlayerTank } from '../entities/PLayerTank';
 
 @Injectable({
     providedIn: 'root'
@@ -44,6 +45,10 @@ export class GameScene {
         // add game map
         const gameMap = new GameMap(new Vector3(0,0,0), 15);
         this._gameEntities.push(gameMap);
+
+        // add the player tank
+        const playerTank = new PlayerTank(new Vector3(7,7,0));
+        this._gameEntities.push(playerTank);
     }
 
     private resize = () => {

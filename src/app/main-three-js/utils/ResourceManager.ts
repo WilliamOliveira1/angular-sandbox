@@ -1,4 +1,5 @@
 import { Texture, TextureLoader } from "three";
+import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 
 export class ResourceManager {
@@ -8,13 +9,48 @@ export class ResourceManager {
     }
 
     private constructor() {}
-
+    // resource list
     private _groundTextures: Texture[] = [];
+    private _models = new Map<string, GLTF>();
+    private _textures = new Map<string, Texture>();
+
+    // public methods to access game loaded resources
+    public getModel(modelName: string): GLTF | undefined {
+        return this._models.get(modelName);
+    }
+
+    public getTexture(textureName: string): Texture | undefined {
+        return this._textures.get(textureName);
+    }
 
     public load = async () => {
         const textureLoader = new TextureLoader();
         await this.loadGroundTextures(textureLoader);
+        await this.loadTextures(textureLoader);
+        await this.loadModels();
     }
+
+    private loadTextures = async (textureLoader: TextureLoader) => {
+        // load game textures
+        // player tank
+        const tankBodyTexture = await textureLoader.loadAsync(
+            "../../../assets/textures/tank-body.png"
+        );
+        const tankTurretTexture = await textureLoader.loadAsync(
+            "../../../assets/textures/tank-turret.png"
+        );
+
+        // add to the game resources
+        this._textures.set("tank-body", tankBodyTexture);
+        this._textures.set("tank-turret", tankTurretTexture);
+    };
+
+    private loadModels = async () => {
+        // instance a model loader
+        const modelLoader = new GLTFLoader();
+        const playerTank = await modelLoader.loadAsync("../../../assets/models/tank.glb");
+        this._models.set("tank", playerTank);
+    };
 
     private loadGroundTextures = async (textureLoader: TextureLoader) => {
         const groundTextureFiles = [
@@ -25,7 +61,7 @@ export class ResourceManager {
             "g5.png",
             "g6.png",
             "g7.png",
-            "g8.png",
+            "g8.png"
         ];
 
         for(let index: number = 0; index < groundTextureFiles.length; index++) {
