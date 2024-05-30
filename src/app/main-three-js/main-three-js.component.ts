@@ -19,10 +19,10 @@ export class MainThreeJsComponent implements AfterViewInit {
   /**
    * init the threeJs scene
    */
-  public initScene(): void {
+  public async initScene(): Promise<void> {
     if (this.rendererContainer) {
       this.gameScene.initialize(this.rendererContainer.nativeElement);
-      this.gameScene.loadCube();
+      await this.gameScene.load();
       this.gameScene.render();
     } else {
       console.error("Renderer container is not available");
