@@ -17,5 +17,5 @@ export abstract class GameEntity {
     }
 
     public load = async () => {};
-    public update = () => {};
+    public update = (_deltaT: number) => {};
 }
