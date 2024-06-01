@@ -11,6 +11,7 @@ import { GameEntity } from '../entities/GameEntity';
 import { GameMap } from '../map/GameMap';
 import { ResourceManager } from '../utils/ResourceManager';
 import { PlayerTank } from '../entities/PlayerTank';
+import { Wall } from '../map/Wall';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class GameScene {
     private _height: number = window.innerHeight;
     private _renderer: WebGLRenderer;
     private _camera: PerspectiveCamera;
-    private _mapSize: number = 30; 
+    private _mapSize: number = 40; 
 
     // threejs scene
     private _scene: Scene;
@@ -54,6 +55,7 @@ export class GameScene {
         // add the player tank
         const playerTank = new PlayerTank(new Vector3(15,7,0));
         this._gameEntities.push(playerTank);
+        this.createWalls();
     }
 
     private resize = () => {
@@ -108,5 +110,21 @@ export class GameScene {
      */
     public get gameEntities(): GameEntity[] {
         return this._gameEntities;
+    }
+    
+    private createWalls = () => {
+        const edge = this._mapSize - 1;
+        
+        this._gameEntities.push(new Wall(new Vector3(0,0,0)));
+        this._gameEntities.push(new Wall(new Vector3(edge,0,0)));
+        this._gameEntities.push(new Wall(new Vector3(edge,edge,0)));
+        this._gameEntities.push(new Wall(new Vector3(0,edge,0)));
+
+        for(let index: number = 1; index < edge; index++) {
+            this._gameEntities.push(new Wall(new Vector3(index,0,0)));
+            this._gameEntities.push(new Wall(new Vector3(0,index,0)));
+            this._gameEntities.push(new Wall(new Vector3(edge,index,0)));
+            this._gameEntities.push(new Wall(new Vector3(index,edge,0)));
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Mesh, Vector3 } from "three";
+import { Box3, Mesh, Sphere, Vector3 } from "three";
 
 export abstract class GameEntity {
     protected _position: Vector3;
@@ -18,4 +18,12 @@ export abstract class GameEntity {
 
     public load = async () => {};
     public update = (_deltaT: number) => {};
+
+    protected _collider?: Box3 | Sphere;
+    /**
+     * get collider
+     */
+    public get collider() {
+        return this._collider;
+    }
 }

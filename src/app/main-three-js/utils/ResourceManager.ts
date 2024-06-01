@@ -69,6 +69,9 @@ export class ResourceManager {
             const texture = await textureLoader.loadAsync(`../../../assets/textures/${element}`);
             this._groundTextures.push(texture);
         }
+
+        const wallTexture = await textureLoader.loadAsync('../../../assets/textures/wall.png')
+        this._textures.set('wall', wallTexture);
     }
 
     public getRandomGroundTexture = () => {
