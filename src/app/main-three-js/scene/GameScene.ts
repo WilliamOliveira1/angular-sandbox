@@ -24,7 +24,7 @@ export class GameScene {
     private _height: number = window.innerHeight;
     private _renderer: WebGLRenderer;
     private _camera: PerspectiveCamera;
-    private _mapSize: number = 60; 
+    private _mapSize: number = 30; 
 
     // threejs scene
     private _scene: Scene;
@@ -40,11 +40,11 @@ export class GameScene {
             antialias: true
         });
         this._renderer.setPixelRatio(window.devicePixelRatio);
-        this._renderer.setSize(this._width*0.95, this._height*0.95);
+        this._renderer.setSize(this._width, this._height);
         
         this._scene = new Scene();
-        this._camera = new PerspectiveCamera(45, this._width / this._height, 0.1, 1000);
-        this._camera.position.set(7, 7, 15);
+        this._camera = new PerspectiveCamera(40, this._width / this._height, 0.1, 1000);
+        this._camera.position.set(15, 7, 15);
         window.addEventListener('resize', this.resize, false)
 
         // add game map
@@ -52,14 +52,14 @@ export class GameScene {
         this._gameEntities.push(gameMap);
 
         // add the player tank
-        const playerTank = new PlayerTank(new Vector3(7,7,0));
+        const playerTank = new PlayerTank(new Vector3(15,7,0));
         this._gameEntities.push(playerTank);
     }
 
     private resize = () => {
         this._width = window.innerWidth;
         this._height = window.innerHeight;
-        this._renderer.setSize(this._width*0.95, this._height*0.95);
+        this._renderer.setSize(this._width, this._height);
         this._camera.aspect = this._width / this._height;
         this._camera.updateProjectionMatrix();
     };

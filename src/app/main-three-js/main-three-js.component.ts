@@ -10,7 +10,7 @@ export class MainThreeJsComponent implements AfterViewInit {
   // set the rendererContainer in the html element as -> <div #rendererContainer></div>
   @ViewChild('rendererContainer', { static: true }) rendererContainer?: ElementRef<HTMLDivElement>;
 
-  constructor(private gameScene: GameScene) {}
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.initScene();
@@ -21,9 +21,9 @@ export class MainThreeJsComponent implements AfterViewInit {
    */
   public async initScene(): Promise<void> {
     if (this.rendererContainer) {
-      this.gameScene.initialize(this.rendererContainer.nativeElement);
-      await this.gameScene.load();
-      this.gameScene.render();
+      GameScene.instance.initialize(this.rendererContainer.nativeElement);
+      await GameScene.instance.load();
+      GameScene.instance.render();
     } else {
       console.error("Renderer container is not available");
     }
