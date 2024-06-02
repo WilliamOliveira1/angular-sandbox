@@ -29,6 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ### Credits
 
 Textures from OpenGameArt 
+Textures from OpenGameArt 
 Artis: [Cethiel](https://opengameart.org/users/cethiel)
 Texture Collection: [link](https://opengameart.org/content/textures-collection)
 
