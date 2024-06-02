@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### Credits
+
+Textures from OpenGameArt
+Artis: [Cethiel](https://opengameart.org/users/cethiel)
+Texture Collection: [link](https://opengameart.org/content/textures-collection)
+
+Artist: [Kutejnikov](https://opengameart.org/users/kutejnikov)
+Wall Texture: [Link](https://opengameart.org/content/wall-texture-1)

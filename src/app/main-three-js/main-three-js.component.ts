@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { GameScene } from './scene/GameScene';
+import { GameScene } from '../Services/ThreeJs/scene/GameScene';
 
 @Component({
   selector: 'app-main-three-js',
