@@ -9,6 +9,7 @@ import {
 } from "three";
 import { GameEntity } from "./GameEntity";
 import { GameScene } from "../scene/GameScene";
+import { ExplosionEffect } from "../effects/ExplosionEffects";
 
 
 export class Bullet extends GameEntity {
@@ -54,6 +55,10 @@ export class Bullet extends GameEntity {
 
         if(collider.length) {
             this._shouldDispose = true;
+            const explosion = new ExplosionEffect(this._mesh.position, 1);
+            explosion.load().then(() => {
+                GameScene.instance.addToScene(explosion);
+            });
         }
     }
 

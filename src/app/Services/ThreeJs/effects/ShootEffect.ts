@@ -1,6 +1,5 @@
 import { DodecahedronGeometry, Mesh, MeshPhongMaterial, Vector3 } from "three";
 import { GameEntity } from "../entities/GameEntity"
-import { color, element } from "three/examples/jsm/nodes/shadernode/ShaderNode";
 import { randomIntInRange, randomSign } from "../utils/MathUtils";
 
 export class ShootEffect extends GameEntity {
