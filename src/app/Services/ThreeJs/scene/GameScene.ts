@@ -45,7 +45,7 @@ export class GameScene {
         
         this._scene = new Scene();
         this._camera = new PerspectiveCamera(40, this._width / this._height, 0.1, 1000);
-        this._camera.position.set(15, 7, 15);
+        this._camera.position.set(15, 7, 10);
         window.addEventListener('resize', this.resize, false)
 
         // add game map

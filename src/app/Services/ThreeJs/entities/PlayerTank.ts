@@ -3,6 +3,7 @@ import { ResourceManager } from "../utils/ResourceManager";
 import { GameEntity } from "./GameEntity";
 import { GameScene } from "../scene/GameScene";
 import { Bullet } from "./Bullet";
+import { ShootEffect } from "../effects/ShootEffect";
 
 type KeyboardState = {
     LeftPressed: boolean;
@@ -173,6 +174,11 @@ export class PlayerTank extends GameEntity {
         const shootingPosition = this._mesh.position.clone().add(offset);
         const bullet = new Bullet(shootingPosition, this._rotation);
         await bullet.load();
-        GameScene.instance.addToScene(bullet);
+
+        const shootEffect = new ShootEffect(shootingPosition, this._rotation);
+        await shootEffect.load();
+
+        GameScene.instance.addToScene(shootEffect);
+        GameScene.instance.addToScene(bullet);        
     }
 }
