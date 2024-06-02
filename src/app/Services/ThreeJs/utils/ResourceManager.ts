@@ -43,6 +43,18 @@ export class ResourceManager {
         // add to the game resources
         this._textures.set("tank-body", tankBodyTexture);
         this._textures.set("tank-turret", tankTurretTexture);
+
+        // enemy tank
+        const tankBodyTextureEnemy = await textureLoader.loadAsync(
+            "../../../assets/textures/tank-body-red.png"
+        );
+        const tankTurretTextureEnemy = await textureLoader.loadAsync(
+            "../../../assets/textures/tank-turret-red.png"
+        );
+
+        // add to the game resources
+        this._textures.set("tank-body-red", tankBodyTextureEnemy);
+        this._textures.set("tank-turret-red", tankTurretTextureEnemy);
     };
 
     private loadModels = async () => {

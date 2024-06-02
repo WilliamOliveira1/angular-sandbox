@@ -10,6 +10,7 @@ import {
 import { GameEntity } from "./GameEntity";
 import { GameScene } from "../scene/GameScene";
 import { ExplosionEffect } from "../effects/ExplosionEffects";
+import { EnemyTank } from "./EnemyTank";
 
 
 export class Bullet extends GameEntity {
@@ -59,6 +60,11 @@ export class Bullet extends GameEntity {
             explosion.load().then(() => {
                 GameScene.instance.addToScene(explosion);
             });
+
+            const enemies = collider.filter((c) => c.entityType === 'enemy');
+            if(enemies.length) {
+                (enemies[0] as EnemyTank).damage(20);
+            }
         }
     }
 

@@ -12,6 +12,8 @@ import { GameMap } from '../map/GameMap';
 import { ResourceManager } from '../utils/ResourceManager';
 import { PlayerTank } from '../entities/PlayerTank';
 import { Wall } from '../map/Wall';
+import { EnemyTank } from '../entities/EnemyTank';
+import { getRandomUniqueTuplesExcluding } from '../utils/MathUtils';
 
 @Injectable({
     providedIn: 'root'
@@ -44,7 +46,7 @@ export class GameScene {
         this._renderer.setSize(this._width, this._height);
         
         this._scene = new Scene();
-        this._camera = new PerspectiveCamera(40, this._width / this._height, 0.1, 1000);
+        this._camera = new PerspectiveCamera(70, this._width / this._height, 0.1, 1000);
         this._camera.position.set(15, 7, 10);
         window.addEventListener('resize', this.resize, false)
 
@@ -55,6 +57,14 @@ export class GameScene {
         // add the player tank
         const playerTank = new PlayerTank(new Vector3(15,7,0));
         this._gameEntities.push(playerTank);
+
+        // add the enemy tank
+        const positionValues = getRandomUniqueTuplesExcluding(10, 20, 5, [15]);
+        debugger;
+        positionValues.forEach((position) => {
+            let enemyTank = new EnemyTank(new Vector3(position[0],position[1],0));
+            this._gameEntities.push(enemyTank);
+        });
         this.createWalls();
     }
 
