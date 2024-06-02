@@ -4,6 +4,7 @@ import { GameEntity } from "./GameEntity";
 import { GameScene } from "../scene/GameScene";
 import { Bullet } from "./Bullet";
 import { ShootEffect } from "../effects/ShootEffect";
+import { SoundEffect, SoundList } from "../effects/SoundEffects";
 
 type KeyboardState = {
     LeftPressed: boolean;
@@ -182,6 +183,7 @@ export class PlayerTank extends GameEntity {
         await shootEffect.load();
 
         GameScene.instance.addToScene(shootEffect);
-        GameScene.instance.addToScene(bullet);        
+        GameScene.instance.addToScene(bullet);
+        SoundEffect.instance.playSound(SoundList.Shoot);
     }
 }

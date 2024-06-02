@@ -60,7 +60,6 @@ export class GameScene {
 
         // add the enemy tank
         const positionValues = getRandomUniqueTuplesExcluding(10, 20, 5, [15]);
-        debugger;
         positionValues.forEach((position) => {
             let enemyTank = new EnemyTank(new Vector3(position[0],position[1],0));
             this._gameEntities.push(enemyTank);

@@ -3,6 +3,7 @@ import { GameEntity } from "./GameEntity";
 import { ResourceManager } from "../utils/ResourceManager";
 import { GameScene } from "../scene/GameScene";
 import { ExplosionEffect } from "../effects/ExplosionEffects";
+import { SoundEffect, SoundList } from "../effects/SoundEffects";
 
 
 export class EnemyTank extends GameEntity {
@@ -111,6 +112,7 @@ export class EnemyTank extends GameEntity {
   
     public damage = (amount: number) => {
       this._life -= amount;
+      SoundEffect.instance.playSound(SoundList.Bomb);
       if (this._life <= 0) {
         this._shouldDispose = true;
         const explosion = new ExplosionEffect(this._mesh.position, 2);
