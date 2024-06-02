@@ -1,11 +1,27 @@
-
-// return a 50% chance sign modifier
+/**
+* Set sign modifier
+* @returns return a 50% chance sign modifier
+*/
 export const randomSign = () => (Math.random() < 0.5 ? -1 : 1);
 
-// returns a random int between a min and max value
+/**
+* Set random number
+* @param min min value to start random set
+* @param max max value to start random set
+* @returns returns a random int between a min and max value
+*/
 export const randomIntInRange = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-export const getRandomUniqueTuplesExcluding = (
+
+/**
+* Set random x and y position values
+* @param min min value to set position
+* @param max max value to set position
+* @param count how many values to return
+* @param exclude values to not count set in the array
+* @returns return a tuple of numbers whith random values
+*/
+export const getRandomUniquePositionsValues = (
     min: number,
     max: number,
     count: number,
