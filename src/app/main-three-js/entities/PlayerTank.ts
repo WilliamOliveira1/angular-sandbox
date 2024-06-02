@@ -2,6 +2,7 @@ import { Box3, Mesh, MeshStandardMaterial, Sphere, Vector3 } from "three";
 import { ResourceManager } from "../utils/ResourceManager";
 import { GameEntity } from "./GameEntity";
 import { GameScene } from "../scene/GameScene";
+import { Bullet } from "./Bullet";
 
 type KeyboardState = {
     LeftPressed: boolean;
@@ -38,13 +39,13 @@ export class PlayerTank extends GameEntity {
                 break;
             case 'ArrowRight':
                 this._keyboardState.RightPressed = true;
-                break;
+                break;            
             default:
                 break;
         }
     }
 
-    private handleKeyUp = (event: KeyboardEvent) => {
+    private handleKeyUp = async (event: KeyboardEvent) => {
         switch (event.key) {
             case 'ArrowUp':
                 this._keyboardState.UpPressed = false;
@@ -57,6 +58,9 @@ export class PlayerTank extends GameEntity {
                 break;
             case 'ArrowRight':
                 this._keyboardState.RightPressed = false;
+                break;
+            case ' ':
+                await this.shoot();
                 break;
             default:
                 break;
@@ -139,7 +143,10 @@ export class PlayerTank extends GameEntity {
 
         const colliders = GameScene.instance.gameEntities.filter(
             (e) =>
-                e !== this && e.collider && e.collider!.intersectsSphere(testingSphere)
+                e !== this &&
+                e.entityType !== 'bullet' &&
+                e.collider &&
+                e.collider!.intersectsSphere(testingSphere)
         );
 
         if(colliders.length) {
@@ -154,5 +161,18 @@ export class PlayerTank extends GameEntity {
             this._mesh.position.y,
             GameScene.instance.camera.position.z
         );
+    }
+
+    private shoot = async () => {
+        const offset = new Vector3(
+            Math.sin(this._rotation) * 0.7,
+            -Math.cos(this._rotation) * 0.7,
+            0
+        );
+
+        const shootingPosition = this._mesh.position.clone().add(offset);
+        const bullet = new Bullet(shootingPosition, this._rotation);
+        await bullet.load();
+        GameScene.instance.addToScene(bullet);
     }
 }

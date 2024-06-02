@@ -89,6 +89,8 @@ export class GameScene {
 
     public render = (): void => {
         requestAnimationFrame(this.render);
+        // remove entities no longer needed
+        this.disposeEntities();
         // obtain the elapsed time between frames
         const deltaT = this._clock.getDelta();
         for(let index = 0; index < this._gameEntities.length; index++) {
@@ -127,4 +129,25 @@ export class GameScene {
             this._gameEntities.push(new Wall(new Vector3(index,edge,0)));
         }
     }
+
+    private disposeEntities = () => {
+        const entitiesToBeDisposed = this._gameEntities.filter(
+            (e) => e.shouldDispose
+        );
+
+        entitiesToBeDisposed.forEach((element) => {
+            this._scene.remove(element.mesh);
+            element.dispose();
+        });
+
+        this._gameEntities = [
+            ...this._gameEntities.filter((e) => !e.shouldDispose)
+        ];
+    }
+
+    // method to dynamically add entities to the scene
+    public addToScene = (entity: GameEntity) => {
+        this._gameEntities.push(entity);
+        this._scene.add(entity.mesh);
+    };
 }
